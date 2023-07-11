@@ -10,10 +10,10 @@ from email_domain_verification.validators import (
 
 email = Email("mmahdi@yahoo.temp")
 validators = (
-    BlackDomainListValidator(["gmail.com", "yahoo.com", "being.com"]),
-    DomainExtensionValidator([".xyz", ".temp"]),
-    LengthValidator(44),
-    MultiDotValidator(),
+    # BlackDomainListValidator(["gmail.com", "yahoo.com", "being.com"]),
+    # DomainExtensionValidator([".xyz", ".temp"]),
+    # LengthValidator(44),
+    # MultiDotValidator(),
     # SafeDomainValidator(),
     # SafeDomainValidatorOnline,
 )
