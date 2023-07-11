@@ -1,6 +1,6 @@
 import abc
-import emails as emails
 from typing import Type, TypeVar
+from .emails import Email
 
 
 T = TypeVar("T")
@@ -14,7 +14,7 @@ class ValidatorInterface(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def check(self, email: emails.Email) -> bool:
+    def check(self, email: Email) -> bool:
         pass
 
 

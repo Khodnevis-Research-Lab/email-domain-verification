@@ -8,12 +8,12 @@ from email_domain_verification.validators import (
     SafeDomainValidatorOnline,
 )
 
-email = Email("mmahdiniknejad@gmail.com")
+email = Email("mmahdi@yahoo.temp")
 validators = (
-    BlackDomainListValidator(["temp.com"]),
-    DomainExtensionValidator(".xyz"),
-    LengthValidator(10),
-    MultiDotValidator(3),
+    BlackDomainListValidator(["gmail.com", "yahoo.com", "being.com"]),
+    DomainExtensionValidator([".xyz", ".temp"]),
+    LengthValidator(44),
+    MultiDotValidator(),
     # SafeDomainValidator(),
     # SafeDomainValidatorOnline,
 )

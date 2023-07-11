@@ -1,11 +1,11 @@
 import typing
-import emails
-import interfaces
-import utils
+from .emails import Email
+from .interfaces import ValidatorInterface
+from .utils import EmailSplitter
 import random
 
 
-class SafeDomainValidator(interfaces.ValidatorInterface):
+class SafeDomainValidator(ValidatorInterface):
     __criterion: typing.Iterable
 
     def __init__(self, criterion: typing.Iterable) -> None:
@@ -15,9 +15,9 @@ class SafeDomainValidator(interfaces.ValidatorInterface):
         if type(self.__criterion) not in (list, tuple):
             raise ValueError("Criterion Is Not Iterable")
 
-    def check(self, email: emails.Email) -> bool:
+    def check(self, email: Email) -> bool:
         # self.validate_criterion()
-        email_postfix = utils.EmailSplitter.find_email_postfix(email.value)
+        email_postfix = EmailSplitter.find_email_postfix(email.value)
         if email_postfix not in self.__criterion:
             raise ValueError(
                 "The Email Domain Is Not Accepted {}".format(email_postfix)
@@ -25,7 +25,7 @@ class SafeDomainValidator(interfaces.ValidatorInterface):
         return True
 
 
-class SafeDomainValidatorOnline(interfaces.ValidatorInterface):
+class SafeDomainValidatorOnline(ValidatorInterface):
     __tokens: typing.Iterable = None
     __token: str = None
 
@@ -38,8 +38,8 @@ class SafeDomainValidatorOnline(interfaces.ValidatorInterface):
     def validate_criterion(self) -> None:
         pass
 
-    def check(self, email: emails.Email) -> bool:
-        email_postfix = utils.EmailSplitter.find_email_postfix(email.value)
+    def check(self, email: Email) -> bool:
+        email_postfix = EmailSplitter.find_email_postfix(email.value)
         if self.tokens:
             token = random.choice(self.__tokens)
         if self.token:
@@ -50,7 +50,7 @@ class SafeDomainValidatorOnline(interfaces.ValidatorInterface):
         return True
 
 
-class LengthValidator(interfaces.ValidatorInterface):
+class LengthValidator(ValidatorInterface):
     __criterion: int
 
     def __init__(self, criterion: int = 5) -> None:
@@ -60,9 +60,9 @@ class LengthValidator(interfaces.ValidatorInterface):
         if self.__criterion < 1:
             raise ValueError("Criterion Is Lower Than 1")
 
-    def check(self, email: emails.Email) -> bool:
+    def check(self, email: Email) -> bool:
         self.validate_criterion()
-        email_prefix = utils.EmailSplitter.find_email_prefix(email.value)
+        email_prefix = EmailSplitter.find_email_prefix(email.value)
         if len(email_prefix) < self.__criterion:
             raise ValueError(
                 "The Email Length Is Lower Than {}".format(self.__criterion)
@@ -71,20 +71,20 @@ class LengthValidator(interfaces.ValidatorInterface):
         return True
 
 
-class MultiDotValidator(interfaces.ValidatorInterface):
+class MultiDotValidator(ValidatorInterface):
     __criterion: int
 
-    def __init__(self, criterion: int = 2) -> None:
+    def __init__(self, criterion: int = 1) -> None:
         self.__criterion = criterion
 
     def validate_criterion(self) -> None:
         if self.__criterion < 1:
             raise ValueError("Criterion Is Lower Than 1")
 
-    def check(self, email: emails.Email) -> bool:
+    def check(self, email: Email) -> bool:
         self.validate_criterion()
-        email_postfix = utils.EmailSplitter.find_email_postfix(email.value)
-        if email_postfix.count(".") >= self.__criterion:
+        email_postfix = EmailSplitter.find_email_postfix(email.value)
+        if email_postfix.count(".") > self.__criterion:
             raise ValueError(
                 "The Email Domain Has More than Than {} Dot '.' ".format(
                     self.__criterion
@@ -94,7 +94,7 @@ class MultiDotValidator(interfaces.ValidatorInterface):
         return True
 
 
-class BlackDomainListValidator(interfaces.ValidatorInterface):
+class BlackDomainListValidator(ValidatorInterface):
     __criterion: typing.Iterable
 
     def __init__(self, criterion: typing.Iterable) -> None:
@@ -104,7 +104,7 @@ class BlackDomainListValidator(interfaces.ValidatorInterface):
         if type(self.__criterion) not in (list, tuple):
             raise ValueError("Criterion Is Not Iterable")
 
-    def check(self, email: emails.Email) -> bool:
+    def check(self, email: Email) -> bool:
         # self.validate_criterion()
         for domain in self.__criterion:
             if domain in email.value:
@@ -115,7 +115,7 @@ class BlackDomainListValidator(interfaces.ValidatorInterface):
         return True
 
 
-class DomainExtensionValidator(interfaces.ValidatorInterface):
+class DomainExtensionValidator(ValidatorInterface):
     __criterion: typing.Iterable
 
     def __init__(self, criterion: typing.Iterable) -> None:
@@ -125,7 +125,7 @@ class DomainExtensionValidator(interfaces.ValidatorInterface):
         if type(self.__criterion) not in (list, tuple):
             raise ValueError("Criterion Is Not Iterable")
 
-    def check(self, email: emails.Email) -> bool:
+    def check(self, email: Email) -> bool:
         # self.validate_criterion()
         for extension in self.__criterion:
             if extension in email.value:
