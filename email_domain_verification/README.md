@@ -100,4 +100,6 @@ validators = [
 
 verifier = EmailVerifier(email)
 verifier.verify(validators)
+
 ```
+#### Copyright (c) 2023, Khodnevisai.com (Mahdi Niknejad).
