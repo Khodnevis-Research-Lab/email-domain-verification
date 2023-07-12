@@ -9,16 +9,15 @@ from email_domain_verification.validators import (
     SafeDomainValidatorOnline,
 )
 
-
 email = Email("hello@gmail.com")
 validators = (
     # BlackDomainListValidator(["gmail.com", "yahoo.com", "being.com"]),
     # DomainExtensionValidator([".xyz", ".temp"]),
-    # LengthValidator(44),
+    LengthValidator(44),
     # MultiDotValidator(),
     # SafeDomainValidator(["google.com", "yahoo.com"]),
     # SafeDomainValidatorOnline(token="582ade864dd84a61abecc4fc18f61993"),
 )
 
 verifier = EmailVerifier(email)
-verifier.verify(validators)
+print(verifier.verify(validators, raise_exception=False))

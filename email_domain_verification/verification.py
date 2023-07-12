@@ -9,7 +9,9 @@ class EmailVerifier:
     def __init__(self, email: Email) -> None:
         self.email = email
 
-    def verify(self, validators: list[ValidatorInterface]) -> bool:
+    def verify(
+        self, validators: list[ValidatorInterface], raise_exception=True
+    ) -> bool:
         for validator in validators:
             try:
                 validator.is_validator()
@@ -18,6 +20,12 @@ class EmailVerifier:
                     "Please Use ValidatorInterface As Parent Class For Your Validator"
                 ).with_traceback(attr_error.__traceback__)
 
-            validator.check(self.email)
+            try:
+                validator.check(self.email)
+            except ValueError as value_error:
+                if raise_exception:
+                    raise value_error
+
+                return False
 
         return True
