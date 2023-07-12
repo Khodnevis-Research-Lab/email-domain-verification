@@ -1,7 +1,7 @@
 import typing
 from .emails import Email
 from .interfaces import ValidatorInterface
-from .utils import EmailSplitter
+from .utils import EmailSplitter, VerifyEmailOnline
 import random
 
 
@@ -28,12 +28,18 @@ class SafeDomainValidator(ValidatorInterface):
 class SafeDomainValidatorOnline(ValidatorInterface):
     __tokens: typing.Iterable = None
     __token: str = None
+    _raise_exception: bool
 
-    def __init__(self, tokens: typing.Iterable) -> None:
-        self.__tokens = tokens
-
-    def __init__(self, token: str) -> None:
+    def __init__(
+        self,
+        token: str = None,
+        tokens: typing.Iterable = None,
+        raise_exception: bool = True,
+        *args,
+        **kwargs
+    ) -> None:
         self.__token = token
+        self.__tokens = tokens
 
     def validate_criterion(self) -> None:
         pass
@@ -45,7 +51,7 @@ class SafeDomainValidatorOnline(ValidatorInterface):
         if self.token:
             token = self.__token
 
-        verifier = utils.VerifyEmailOnline(email_postfix, token)
+        verifier = VerifyEmailOnline(email_postfix, token)
         verifier.verify(raise_exception=True)
         return True
 
