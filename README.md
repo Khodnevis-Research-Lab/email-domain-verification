@@ -4,13 +4,13 @@ this package can provide some email validators with which users can validate the
 ## Installation
 <p>your module will be installed by PYPI</p>
 
-```
+```Python
 pip install email-domain-verification
 ```
 
 ## Usage
 
-```
+```Python
 from email_domain_verification import Email, EmailVerifier
 from email_domain_verification.validators import BlackDomainListValidator
 
@@ -42,7 +42,7 @@ verifier.verify(validators)
 
 ### prevent raise exception
 
-```
+```Python
 from email_domain_verification import Email, EmailVerifier
 from email_domain_verification.validators import BlackDomainListValidator
 
@@ -64,7 +64,7 @@ validated: bool = verifier.verify(validators, raise_exception=False)
 
 ## Create Custom Validator
 
-```
+```Python
 from email_domain_verification import Email, EmailVerifier
 from email_domain_verification.interfaces import ValidatorInterface
 from email_domain_verification.validators import LengthValidator
