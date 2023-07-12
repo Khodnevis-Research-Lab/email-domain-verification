@@ -46,9 +46,9 @@ class SafeDomainValidatorOnline(ValidatorInterface):
 
     def check(self, email: Email) -> bool:
         email_postfix = EmailSplitter.find_email_postfix(email.value)
-        if self.tokens:
+        if self.__tokens:
             token = random.choice(self.__tokens)
-        if self.token:
+        if self.__token:
             token = self.__token
 
         verifier = VerifyEmailOnline(email_postfix, token)

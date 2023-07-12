@@ -26,7 +26,7 @@ class VerifyEmailOnline:
     def verify(self, raise_exception=False):
         response = requests.get(self.__verifymail)
         data = json.loads(response.content.decode())
-        if data["disposable"] == True:
+        if data.get("disposable", True) == False:
             return True
 
         if raise_exception:
