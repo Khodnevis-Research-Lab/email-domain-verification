@@ -5,7 +5,7 @@ this package can provide some email validators with which users can validate the
 <p>your module will be installed by PYPI</p>
 
 ```
-pip install email_domain_verification
+pip install email-domain-verification
 ```
 
 ## Usage
