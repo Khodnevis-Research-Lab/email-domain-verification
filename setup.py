@@ -117,15 +117,15 @@ verifier.verify(validators)
 if __name__ == "__main__":
     setuptools.setup(
         name="email_domain_verification",
-        version="1.0.2",
-        description="Can Verify All The Email Forms And Domains",
-        author="Mahdi Niknejad",
+        version="1.1.0",
+        description="Email Validator",
+        author="Mahdi Niknejad, Khodnevisai.com",
         author_email="mmahdiniknejad@gmail.com",
-        url="https://github.com/khodnevis-app/development_tools",
+        url="https://github.com/Khodnevis-Research-Lab/email-domain-verification",
         project_urls={
-            "Documentation": "https://github.com/khodnevis-app/development_tools",
-            "Source": "https://github.com/khodnevis-app/development_tools",
-            "Tracker": "https://github.com/khodnevis-app/development_tools/issues",
+            "Documentation": "https://github.com/Khodnevis-Research-Lab/email-domain-verification",
+            "Source": "https://github.com/Khodnevis-Research-Lab/email-domain-verification",
+            "Tracker": "https://github.com/Khodnevis-Research-Lab/email-domain-verification/issues",
         },
         long_description=long_description,
         long_description_content_type="text/markdown",
@@ -146,7 +146,7 @@ if __name__ == "__main__":
             "Programming Language :: Python :: 3.11",
             "Topic :: Software Development",
         ],
-        python_requires=">=3.10",
+        python_requires=">=3.7",
         install_requires=[
             "requests",
         ],
